@@ -13,18 +13,18 @@ function App() {
   const[isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  useEffect(()=>{const handleScroll = ()=>{
-    if(window.scrollY===0){
-      setIsTopOfPage(true);
-      setSelectedPage(SelectedPage.Home)
-    }
-    else 
-      setIsTopOfPage(false);
-    window.addEventListener("scroll",handleScroll);
-    return()=>window.removeEventListener("scroll",handleScroll);
-    
-  }
-  },[])
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsTopOfPage(true);
+        setSelectedPage(SelectedPage.Home);
+      }
+      if (window.scrollY !== 0) setIsTopOfPage(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
   return (
     <div className="app bg-amber-50 h-full w-full">
       <NavBar selectedPage={selectedPage} setSelectedPage={setSelectedPage} isTopOfPage={isTopOfPage}/>
